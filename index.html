@@ -2728,17 +2728,21 @@
                     });
                   </script>
                   <script>
-                    // Mendapatkan nama dari URL
-                    var urlParams = new URLSearchParams(window.location.search);
-                    var nama = urlParams.get("to");
+                    document.addEventListener("DOMContentLoaded", function () {
+                      if (document.querySelectorAll(".namatamu").length >= 1) {
+                        let namatamuElements = document.querySelectorAll(".namatamu");
+                        namatamuElements.forEach((element) => {
+                          element.innerHTML = cleanText(element.innerHTML);
+                        });
+                      }
+                    });
 
-                    // Jika nama tidak kosong, ubah teks di dalam elemen-elemen yang sesuai
-                    if (nama) {
-                      // Mengganti teks di dalam elemen <div class="wdp-dear">
-                      $(".wdp-dear").html("Bapak/Ibu/Saudara/i " + nama);
-
-                      // Mengganti teks di dalam elemen <div class="wdp-name namatamu">
-                      $(".wdp-name.namatamu").html(nama);
+                    function cleanText(str) {
+                      // Membersihkan karakter yang diencode seperti &amp;
+                      str = str.replace(/&amp;/g, "&");
+                      // Membersihkan karakter escape seperti \'
+                      str = str.replace(/\\'/g, "'");
+                      return str;
                     }
                   </script>
 
