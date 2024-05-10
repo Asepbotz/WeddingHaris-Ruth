@@ -2728,15 +2728,17 @@
                     });
                   </script>
                   <script>
-                    // decode &amp; and \'
-                    if (jQuery(".namatamu").length >= 1) {
-                      let tmpHtmlNamatamu = document.querySelectorAll(".namatamu");
-                      tmpHtmlNamatamu.forEach((tamuTexts) => {
-                        tamuTexts.innerHTML = cleanIts(tamuTexts.innerHTML);
-                      });
-                    }
-                    function cleanIts(str) {
-                      return jQuery("<textarea></textarea>").html(str.replace(/\\/g, "")).text();
+                    // Mendapatkan nama dari URL
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var nama = urlParams.get("to");
+
+                    // Jika nama tidak kosong, ubah teks di dalam elemen-elemen yang sesuai
+                    if (nama) {
+                      // Mengganti teks di dalam elemen <div class="wdp-dear">
+                      $(".wdp-dear").html("Bapak/Ibu/Saudara/i " + nama);
+
+                      // Mengganti teks di dalam elemen <div class="wdp-name namatamu">
+                      $(".wdp-name.namatamu").html(nama);
                     }
                   </script>
 
